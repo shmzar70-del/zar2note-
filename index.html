@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6d5dfc">
+  <meta name="description" content="Zar2Note offline music note detection">
+  <title>Zar2Note</title>
+
+  <!-- PWA configuration: manifest.json -->
+  <link rel="manifest" href="./manifest.json">
+</head>
+<body>
+  <p>Opening Zar2Note…</p>
+  <p>If it does not open automatically, <a href="./zar2note6.html">tap here to open the app</a>.</p>
+
+  <script>
+    // Offline support: service-worker.js
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', async () => {
+        try {
+          await navigator.serviceWorker.register('./service-worker.js');
+          await navigator.serviceWorker.ready;
+        } catch (error) {
+          console.error('Service worker registration failed:', error);
+        }
+        window.location.replace('./zar2note6.html');
+      });
+    } else {
+      window.location.replace('./zar2note6.html');
+    }
+  </script>
+</body>
+</html>
